@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <div id="maincontainer"></div>
+
+        <script>
+            const maincontainer = document.getElementById("maincontainer");
+            const head1 = document.createElement("h2");
+            head1.setAttribute("id", "head1");
+            let head1Text = document.createTextNode("Exercise 04: JavaScript&DOM");
+            head1.appendChild(head1Text);
+            maincontainer.appendChild(head1);
+
+            const button = document.createElement("button");
+            button.setAttribute("id", "button");
+            button.setAttribute("type", "button");
+            button.setAttribute("onclick", "DateWebWorker()");
+            let buttonText = document.createTextNode("Click me to display Date and Time");
+            button.appendChild(buttonText);
+            
+            const divButton = document.createElement("div")
+            divButton.setAttribute("style","height:21px")
+            divButton.appendChild(button)
+            maincontainer.appendChild(divButton);
+
+            const personalDiv = document.createElement("div");
+            personalDiv.setAttribute("id","personal");
+            personalDiv.setAttribute("style","padding-top:25px;")
+            
+            const personalText = document.createElement("span");
+            personalText.setAttribute("id","personalText")
+            personalText.innerText = "Personal info";
+            personalText.setAttribute("style", "text-decoration:underline; color:pink; cursor:pointer;");
+            personalText.setAttribute("onclick","show()")
+
+            const personalList = document.createElement("ul");
+            personalList.setAttribute("id","perList");
+            personalList.style.display = "none"
+            
+            const nameList = document.createElement("li");
+            nameList.innerText = "Pattaradanai Kamsuan, ID: 64011225"
+            
+            const subjectList = document.createElement("li");
+            subjectList.innerText = "Subject: Web Application Development"
+            
+            const semeterList = document.createElement("li");
+            semeterList.innerText = "Semeter: 2"
+
+            personalList.appendChild(nameList)
+            personalList.appendChild(subjectList)
+            personalList.appendChild(semeterList)
+        
+            personalDiv.appendChild(personalText)
+            personalDiv.appendChild(personalList)
+            maincontainer.appendChild(personalDiv)
+            
+            const snapshots = document.createElement("div")
+            const headSnap = document.createElement("h1")
+            headSnap.innerText="Snapshots"
+
+            const imageList = ["https://img.freepik.com/free-vector/realistic-fireworks-border-illustration_1284-57268.jpg?w=2000",
+                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHJcEvQAw2hQEWo3C1UpVjLDrc-0oPwC3bTA&usqp=CAU",
+                                "https://static1.cbrimages.com/wordpress/wp-content/uploads/2022/12/my-hero-academia-dabi.jpg",
+                                "https://media.discordapp.net/attachments/873933404230545459/1072442695634661386/okk.png?width=542&height=675"]
+
+            const snapList = document.createElement("ul");
+
+
+            const firework = document.createElement("li")
+            firework.setAttribute("id","firework")
+            const fireworkText = document.createElement("span")
+            fireworkText.innerText = "Fireworks"
+            firework.appendChild(fireworkText)
+            fireworkText.setAttribute("onclick","loadImage(0)")
+            fireworkText.setAttribute("style","text-decoration:underline; color:blue; cursor:pointer;")
+
+            const crest = document.createElement("li")
+            crest.setAttribute("id","arest")
+            const crestText = document.createElement("span")
+            crestText.innerText = "Crest"
+            crest.appendChild(crestText)
+            crestText.setAttribute("onclick","loadImage(1)")
+            crestText.setAttribute("style","text-decoration:underline; color:blue; cursor:pointer;")
+
+            const action = document.createElement("li")
+            action.setAttribute("id","action")
+            const actionText = document.createElement("span")
+            actionText.innerText = "Action"
+            action.appendChild(actionText)
+            actionText.setAttribute("onclick","loadImage(2)")
+            actionText.setAttribute("style","text-decoration:underline; color:blue; cursor:pointer;")
+
+            const buffalo = document.createElement("li")
+            buffalo.setAttribute("id","buffalo")
+            const buffaloText = document.createElement("span")
+            buffaloText.innerText = "Buffalo"
+            buffalo.appendChild(buffaloText) 
+            buffaloText.setAttribute("onclick","loadImage(3)")
+            buffaloText.setAttribute("style","text-decoration:underline; color:blue; cursor:pointer;")
+
+            snapList.appendChild(firework)
+            snapList.appendChild(crest)
+            snapList.appendChild(action)
+            snapList.appendChild(buffalo)
+            snapshots.appendChild(headSnap)
+            snapshots.appendChild(snapList)
+            maincontainer.appendChild(snapshots)
+
+            const image = document.createElement("img")
+            image.setAttribute("src","https://www.ce.kmitl.ac.th/api/main/banner/download/1")
+            image.setAttribute("width","550px")
+
+            maincontainer.appendChild(image)
+            
+            let onrun = false;
+            const DateWebWorker = () => {
+                const buttonEle = document.getElementById("button");
+                if (!onrun) {
+                    worker = new Worker("./worker.js");
+                    worker.onmessage = (event) => {
+                        buttonEle.style.position = "fixed";
+                        buttonEle.style.top = "0";
+                        buttonEle.style.right = "0";
+                        buttonEle.style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+                        buttonEle.style.color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+                        buttonEle.innerText = event.data;
+                        onrun = true;
+                    };
+                } 
+                else {
+                    onrun = false;
+                    worker.terminate();
+                    button.style.position = "static";
+                }
+            };
+
+            const show = () => {
+                let list = document.getElementById("perList")
+
+                if (list.style.display == "none") {
+                    list.style.display = "block"
+                } 
+                else {
+                    list.style.display = "none"
+                }
+            }
+            const loadImage = (x) => {
+                console.log(x)
+                let image = document.querySelector("img")
+                image.setAttribute("src",imageList[x])
+            }
+
+                const element = document.getElementById("personalText");
+
+                element.addEventListener("mouseover", function() {
+                    element.setAttribute("style","text-decoration:underline; background-color : yellow; color : blue; cursor:pointer;")
+                });
+
+                element.addEventListener("mouseout", function() {
+                    element.setAttribute("style","text-decoration:underline; color:pink; cursor:pointer; cursor:pointer;") 
+                });
+
+
+        </script>
+    </body>
+</html>

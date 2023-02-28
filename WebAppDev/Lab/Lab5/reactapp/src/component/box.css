@@ -1,0 +1,49 @@
+#mainDiv{
+    width: 65%;
+    height: fit-content;
+    background-color: #FDEBD5;
+    margin: 0.5px;
+    border: medium solid black ;
+    border-radius: 10px;
+}
+#box{
+    padding: 20px;
+}
+#first{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+img{
+    float: right;
+}
+#row1{
+    width: 60%;
+}
+#row2{
+    width: 40%;
+    align-self: center;
+}
+#second{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 20px;
+}
+#second span{
+    border: medium solid black;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 10px;
+    color: darkorchid;
+    background-color: chartreuse;
+    font-weight: 1000;
+    font-size: x-large;
+    border-radius: 10px;
+}
+button{
+    height: 100%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-bottom: 1px;
+}
